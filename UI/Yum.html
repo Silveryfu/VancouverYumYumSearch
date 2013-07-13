@@ -10,37 +10,46 @@
     <!-- Le styles -->
     <link href="flatstrap-master/assets/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
-      body {
-	    background-image: url(img/fruits.jpg);
-        padding-top: 20px;
-        padding-bottom: 40px;
+      @font-face {
+			font-family: "Rafa";
+			src: url(font/Rafa.ttf);
+		}
+		
+	  body {
+	    background-image: url(img/r22.jpg);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-attachment: fixed;
       }
-
+	
       /* Custom container */
 
-	  
-	  
-	  .span6{
-		text-align: center;
-		}
 
       /* Main marketing message and sign up button */
       .jumbotron {
-        margin: 200px 0;
-		padding: 100px 0;
+        margin: 100px 0;
+		padding: 50px 0;
         text-align: center;
       }
       .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
+	    font-family: "Rafa", Verdana, Tahoma;
+        font-size: 18px;
+        padding: 7px 15px;
       }
 	  
 	  .jumbotron .search .input-mysize { 
 	     width: 800px;
 		 height: 30px;
-		 
+		
 	  }
+	  
+	  .footer{
+	  padding: 200px 0;
+	  }
+	  
 
+	  
+	
     </style>
  
   </head>
@@ -48,16 +57,14 @@
   <body>
 
     <div class="container">
-
 	  
 	  <div class="jumbotron">
+		<img src="img/icon.png"/>
 		<form class="search">
 			<input type="text" class="search-query input-mysize" placeholder="">
 		</form>
-        <a class="btn  btn-success" href="#">Yum Now!</a>
+        <a class="btn btn-success" href="#">Yum Now!</a>
       </div>
-
-      <hr>
 
 
       <div class="footer">
