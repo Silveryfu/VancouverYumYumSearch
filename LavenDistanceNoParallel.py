@@ -1,10 +1,8 @@
 import threading
-MATRIX=[]
-
 
 def distance(word1,word2):
   #Calculate the Distance of Two Words
-  global MATRIX
+  MATRIX=[]
   len1=len(word1)
   len2=len(word2)
   if len1<len2:  #can improve the performance
@@ -29,9 +27,7 @@ def distance(word1,word2):
   return MATRIX[len2][len1]
 
 def main():
-    from timeit import Timer
-    t1=Timer("distance('batsssssss','catss')","from __main__ import distance")
-    print t1.timeit(10000)
+  print distance('fast','cats')
 
 if __name__=="__main__":
   main()
