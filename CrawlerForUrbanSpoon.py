@@ -40,7 +40,7 @@ def getAllLink(url,expression):
 		area=areas[i]
 		area=area.lstrip("href=\"")
 		area=area.rstrip("\"")
-		areas[i]="http://www.urbanspoon.com"+area
+		areas[i]="http://66.135.44.85"+area
 	areas={}.fromkeys(areas).keys()
 	return areas
 #def parser(url):
@@ -90,14 +90,14 @@ def writeToFile(restaurantUrl):
 			score = "".join(score)
 		#Address
 		#<div class="neighborhood">
-		#<a href="http://www.urbanspoon.com/n/14/1319/Vancouver/Robson-Street-West-End-restaurants" 	class="ga_event" data-ga_action="explore-resto-neighborhood" data-ga_catg="Explore" data-ga_label="test=gsl-v2-a,page=restaurants-show,link-neighborhood-name">Robson Street/West End</a>
+		#<a href="http://66.135.44.85/n/14/1319/Vancouver/Robson-Street-West-End-restaurants" 	class="ga_event" data-ga_action="explore-resto-neighborhood" data-ga_catg="Explore" data-ga_label="test=gsl-v2-a,page=restaurants-show,link-neighborhood-name">Robson Street/West End</a>
 		#</div>
 		#<span class="street-address">
 		#1703 Robson St
 		#</span>
 		#<br><span class="locality">Vancouver</span>,
 		#<span class="region">BC</span>
-		#<a href="http://www.urbanspoon.com/zip/14/V6G1C8/Vancouver-restaurants.html">V6G1C8</a>
+		#<a href="http://66.135.44.85/zip/14/V6G1C8/Vancouver-restaurants.html">V6G1C8</a>
 		#</div>
 		address = soup.find("div", class_="address").get_text().encode('ascii','ignore').strip(" \n\t").split("\n")
 		address = "".join(address)
@@ -105,7 +105,7 @@ def writeToFile(restaurantUrl):
 		#imageUrl
 		imageUrl = soup.find("div", class_="resto_photos").find("ul")
 		if not imageUrl is None:
-			imageUrl = "http://www.urbanspoon.com"+imageUrl.find("li").find("a")["href"].encode("ascii",'ignore')
+			imageUrl = "http://66.135.44.85"+imageUrl.find("li").find("a")["href"].encode("ascii",'ignore')
 		else:
 			imageUrl = ""
 		#Type example: Pub Food, Burgers, Diner        a string not a list
@@ -137,7 +137,7 @@ def writeToFile(restaurantUrl):
 	else:
 		print "Ops"
 def main():
-	areas = getAllLink("http://www.urbanspoon.com/c/14/Vancouver-restaurants.html","href=\"/\w+?/\d+?/\d+?/Vancouver/[\w-]+?\"")
+	areas = getAllLink("http://66.135.44.85/c/14/Vancouver-restaurants.html","href=\"/\w+?/\d+?/\d+?/Vancouver/[\w-]+?\"")
 	for area in areas:
 		if(flag):
 			break
