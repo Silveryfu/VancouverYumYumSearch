@@ -45,7 +45,11 @@
 	  .footer{
 	  padding: 200px 0;
 	  }
-	 
+	  
+	  .onselect{
+		background-color: #0000FF;
+	  }
+	  
     </style>
  
   </head>
@@ -56,10 +60,16 @@
 	  
 	  <div class="jumbotron">
 		<img src="img/icon.png"/>
-		<form class="search">
-			<input type="text" class="search-query input-mysize" placeholder="">
+		<form class="search" action="Yumming.html">
+			<input name="query" type="text" class="search-query input-mysize" placeholder="">
+			<table>
+				<tr><td>Result1</td></tr>
+				<tr><td>Result2</td></tr>
+				<tr><td>Result3</td></tr>
+				<tr><td>Result4</td></tr>
+			</table>
 			<br><br>
-			<a class="btn btn-success" href="Yumming.html">Yum Now!</a>
+			<input class="btn btn-success" type="submit" value="Yum Now!"/>
 		</form>
         
       </div>
@@ -87,6 +97,49 @@
     <script src="flatstrap-master/assets/js/bootstrap-collapse.js"></script>
     <script src="flatstrap-master/assets/js/bootstrap-carousel.js"></script>
     <script src="flatstrap-master/assets/js/bootstrap-typeahead.js"></script>
+	<script type="text/javascript" src="js/assets/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript">
+		function request(text){<!--add the data to the chart-->
+			$.ajax({
+				url: "query.php?query="+text,
+				success: function(point) {
+					var x = (new Date()).getTime();
+					var y = parseInt(point.count);
+					var series = ch.series[0];
+					var shift = series.data.length > 20;
+					series.addPoint([x,y], true, shift);
+					setTimeout(request, 1000);
+				}
+			});
+		}
+		$(document).ready(function(){
+			$("form input").keyup(function(){
+				_this=$(this)
+				text=_this.val()
+				if(text==""){
+					$("table").hide();
+				}
+				else{
+					request(text);
+					$("table").show();
+				}
+			});
+			$(document).click(function(){
+				$("table").hide();
+			});
+			$("table tr").click(function(e){
+				$("form input").val($(this).children("td").text());
+				$("table").hide();
+				$("form").submit();
+				e.stopPropagation();
+			});
+			$("table tr").hover(function(){
+				$(this).addClass("onselect");
+			},function(){
+				$(this).removeClass("onselect");
+			});
+		});
+	</script>
 
   </body>
 </html>
