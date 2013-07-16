@@ -27,18 +27,41 @@
       .jumbotron {
         margin: 100px 0;
 		padding: 50px 0;
+		height: 300px;
         text-align: center;
+		overflow:hidden;
       }
+	  
       .jumbotron .btn {
 	    font-family: "Rafa", Verdana, Tahoma;
         font-size: 25px;
-        padding: 7px 15px;
+		margin-left: 39px;
+		text-align: left;
+		width: 120px;
+        padding: 8px;
       }
 	  
-	  .jumbotron .search .input-mysize { 
-	     width: 800px;
+     .jumbotron .theTable{
+	    text-align: left;
+		width: 790px;
+		background-color: #ffffff;
+		display: none;
+      }
+	  
+	  .jumbotron .search{ 
+	     text-align: center;
+	     width: 750px;
 		 height: 30px;
+		 margin-left: 72px;
 		
+	  }
+	  
+	  .jumbotron .search .input-mysize { 
+	     font-family: Verdana;
+		 font-size: 23px;
+		 width: 760px;
+		 height: 30px;
+		 vertical-align: top;
 	  }
 	  
 	  
@@ -47,7 +70,10 @@
 	  }
 	  
 	  .onselect{
-		background-color: #0000FF;
+	    font-family: Verdana;
+		font-size: 20px;
+		background-color: #3498db;
+		
 	  }
 	  
     </style>
@@ -62,12 +88,12 @@
 		<img src="img/icon.png"/>
 		<form class="search" action="Yumming.html">
 			<input name="query" type="text" class="search-query input-mysize" placeholder="">
-			<table>
+			  <table class="theTable">
 				<tr><td>Result1</td></tr>
 				<tr><td>Result2</td></tr>
 				<tr><td>Result3</td></tr>
 				<tr><td>Result4</td></tr>
-			</table>
+              </table>
 			<br><br>
 			<input class="btn btn-success" type="submit" value="Yum Now!"/>
 		</form>
@@ -97,7 +123,8 @@
     <script src="flatstrap-master/assets/js/bootstrap-collapse.js"></script>
     <script src="flatstrap-master/assets/js/bootstrap-carousel.js"></script>
     <script src="flatstrap-master/assets/js/bootstrap-typeahead.js"></script>
-	<script type="text/javascript" src="js/assets/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="flatstrap-master/assets/jquery-1.9.0.min.js"></script>
+	
 	<script type="text/javascript">
 		function request(text){<!--add the data to the chart-->
 			$.ajax({
