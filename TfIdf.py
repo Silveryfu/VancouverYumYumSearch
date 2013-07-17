@@ -66,8 +66,7 @@ def getWeight(term, docNum):
     if(tFtd==0):
         Wtd=0;
     else:
-        Wtd=(1+math.log10(tFtd))*math.log10(NumberOfDoc/dFt)
-    Result=[term,' ', str(Wtd), '\n']  #a line which will be written to the finalDoc   
+        Wtd=round((1+math.log10(tFtd))*math.log10(NumberOfDoc/dFt),2)  
     return Wtd
     
 def main():

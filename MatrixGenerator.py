@@ -7,17 +7,18 @@ def generateMatrix():
     dicLines=fDic.readlines()
     NumberOfDoc=len(docLines)/10
     Matrix=[]
+    fMatrix=open("FinalMatrix.txt","a+")
     for line in dicLines:
         term=line.rstrip("\n")
-        termVector=[term,","]
+        fMatrix.write(term+",")
         for i in range(0, NumberOfDoc):
             Wtd=getWeight(term, i+1)
             if Wtd==0:
                 continue
             else:
-                termVector.append(str(i+1)+" "+str(Wtd)+",")
-        print termVector
-
+                fMatrix.write(str(i+1)+" "+str(Wtd)+",")
+        fMatrix.write("\n")
+        print "Proceed."
 
 def main():
     generateMatrix()
