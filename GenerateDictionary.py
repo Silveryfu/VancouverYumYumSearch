@@ -32,7 +32,11 @@ def main():
 		for i in range(len(addresses)-1):
 			address=addresses[i]
 			address=address.lower()
-			add(address)
+			addre=re.match("[^\d]+",address)
+			if addre is None:
+				add(address)
+			else:
+				add(addre.group(0))
 		addresses=addresses[len(addresses)-1].split(",")
 		for address in addresses:
 			address=address.lower()
@@ -50,6 +54,9 @@ def main():
 			for ty in type:
 				ty=ty.strip().lower()
 				add(ty)
+		prices=lines[10*i+9].rstrip("\n").split()
+		for price in prices:
+			add(price)
 	for i in range(26):
 		for word in dictionary[num[i]]:
 			dic.write(word+"\n")
