@@ -120,7 +120,7 @@ def getWeight(term, docNum):
         if words[0]==term:
             dFt=int(words[1])
             break
-    if(tFtd==0):
+    if(tFtd==0 or dFt==0):
         Wtd=0;
     else:
         Wtd=round((1+math.log10(tFtd))*math.log10(NumberOfDoc/dFt),2)  

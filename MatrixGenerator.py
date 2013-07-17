@@ -5,11 +5,12 @@ def generateMatrix():
     fDoc=open("Document.txt","r")
     docLines=fDoc.readlines()
     dicLines=fDic.readlines()
+    dicLength=len(dicLines)
     NumberOfDoc=len(docLines)/10
     Matrix=[]
     fMatrix=open("FinalMatrix.txt","a+")
-    for line in dicLines:
-        term=line.rstrip("\n")
+    for j in range(118,dicLength): #torres change 118 
+        term=dicLines[j].rstrip("\n")
         fMatrix.write(term+",")
         for i in range(0, NumberOfDoc):
             Wtd=getWeight(term, i+1)
