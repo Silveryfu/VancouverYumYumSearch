@@ -29,8 +29,8 @@ def main():
 			word=word.strip(" ").lower()
 			add(word)
 		addresses=lines[10*i+5].rstrip("\n").split()
-		for i in range(len(addresses)-1):
-			address=addresses[i]
+		for j in range(len(addresses)-1):
+			address=addresses[j]
 			address=address.lower()
 			addre=re.match("[^\d]+",address)
 			if addre is None:
@@ -56,6 +56,7 @@ def main():
 				add(ty)
 		prices=lines[10*i+9].rstrip("\n").split()
 		for price in prices:
+			price=price.lower()
 			add(price)
 	for i in range(26):
 		for word in dictionary[num[i]]:
