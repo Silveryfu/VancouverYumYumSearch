@@ -27,7 +27,10 @@ def getWeight(term):
         Wtd=0;
     else:
         Wtd=(1+math.log10(tFtd))*math.log10(100.0/dFt)
-    file=open("FinalDoc.txt","w")
+
+    Result=[term,' ', str(Wtd), '\n']  #a line which will be written to the finalDoc   
+    fileFinalDoc=open("FinalDoc.txt","a")
+    fileFinalDoc.writelines(Result)    
     
 def main():
     print getWeight('obtus')

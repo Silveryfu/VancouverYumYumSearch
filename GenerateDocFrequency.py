@@ -3,7 +3,7 @@ import os
 def generateDocFrequency():
     result=[]
     fileNameList=os.listdir("C:/Users/admin/Desktop/stemmed")
-    fterm=open("C:/Users/admin/SilveryGit/SearchEngine/Dictionary.txt","r")
+    fterm=open("Dictionary.txt","r")
     TermLines=fterm.readlines()
     for term in TermLines:
         term=term.rstrip("\n")
@@ -24,7 +24,7 @@ def generateDocFrequency():
                         break
         result.append([term,counter])
         print [term,counter]
-    fileResult=open("C:/Users/admin/SilveryGit/SearchEngine/DocumentFrequency.txt","w")
+    fileResult=open("C:/Users/admin/SilveryGit/SearchEngine/documentFrequency.txt","w")
     for row in result:
         fileResult.write(str(row[0])+" "+str(row[1])+"\n")
     print "Process completed."
