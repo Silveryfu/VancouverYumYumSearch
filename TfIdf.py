@@ -67,11 +67,8 @@ def getWeight(term, docNum):
         Wtd=0;
     else:
         Wtd=(1+math.log10(tFtd))*math.log10(NumberOfDoc/dFt)
-    print NumberOfDoc
     Result=[term,' ', str(Wtd), '\n']  #a line which will be written to the finalDoc   
-    fileFinalDoc=open("FinalDoc.txt","a+")
-    fileFinalDoc.writelines(Result)
-    print Result
+    return Wtd
     
 def main():
     print getWeight('robson', 1)
