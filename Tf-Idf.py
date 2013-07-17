@@ -6,7 +6,7 @@ def getWeight(term):
     
     #calculate the frequency of term in a document 
     tFtd=0;
-    file=open("Result.txt","r")
+    file=open("Document.txt","r")
     lines=file.readlines()
     for line in lines:
         words=line.split()
@@ -29,11 +29,11 @@ def getWeight(term):
         Wtd=(1+math.log10(tFtd))*math.log10(100.0/dFt)
 
     Result=[term,' ', str(Wtd), '\n']  #a line which will be written to the finalDoc   
-    fileFinalDoc=open("FinalDoc.txt","a")
+    fileFinalDoc=open("FinalDoc.txt","a+")
     fileFinalDoc.writelines(Result)    
     
 def main():
-    print getWeight('obtus')
+    print getWeight('and')
 
 if __name__=="__main__":
     main()
