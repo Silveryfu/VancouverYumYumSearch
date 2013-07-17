@@ -59,10 +59,67 @@ def getWeight(term, docNum):
     dFt=0
     file=open("documentFrequency.txt","r")
     lines=file.readlines()
-    for line in lines:
-        words=line.split()
-        if cmp(words[0],term)==0:
+    stair=0 #the start entry/line
+    if(term[0]=='a'):
+        stair=0
+    elif(term[0]=='b'):
+        stair=101
+    elif(term[0]=='c'):
+        stair=889
+    elif(term[0]=='d'):
+        stair=1100
+    elif(term[0]=='e'):
+        stair=1225
+    elif(term[0]=='f'):
+        stair=1281
+    elif(term[0]=='g'):
+        stair=1379
+    elif(term[0]=='h'):
+        stair=1475
+    elif(term[0]=='i'):
+        stair=1573
+    elif(term[0]=='j'):
+        stair=1609
+    elif(term[0]=='k'):
+        stair=1657
+    elif(term[0]=='l'):
+        stair=1736
+    elif(term[0]=='m'):
+        stair=1824
+    elif(term[0]=='n'):
+        stair=1961
+    elif(term[0]=='o'):
+        stair=2020
+    elif(term[0]=='p'):
+        stair=2060
+    elif(term[0]=='q'):
+        stair=2199
+    elif(term[0]=='r'):
+        stair=2211
+    elif(term[0]=='s'):
+        stair=2307
+    elif(term[0]=='t'):
+        stair=2528
+    elif(term[0]=='u'):
+        stair=2645
+    elif(term[0]=='v'):
+        stair=2660
+    elif(term[0]=='w'):
+        stair=2702
+    elif(term[0]=='x'):
+        stair=2769
+    elif(term[0]=='y'):
+        stair=2774
+    elif(term[0]=='z'):
+        stair=2803
+    else:
+        stair=2819
+    
+    for i in range(stair, len(lines)):
+        words=lines[i].split()
+        if words[0]==term:
             dFt=int(words[1])
+            break
     if(tFtd==0):
         Wtd=0;
     else:
@@ -70,7 +127,7 @@ def getWeight(term, docNum):
     return Wtd
     
 def main():
-    print getWeight('robson', 1)
+    print getWeight('street/west', 1)
 
 if __name__=="__main__":
     main()
