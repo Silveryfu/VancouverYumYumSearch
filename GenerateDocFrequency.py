@@ -19,7 +19,6 @@ def generateDocFrequency():
                 else:
                     line=docLines[docNum*10+i].rstrip("\n")
                     if i==1:
-                        print line
                         words=line.split()
                         for word in words:
                             word = word.lower()
@@ -29,7 +28,6 @@ def generateDocFrequency():
                                 break
                     elif i==5:
                         words=line.split()
-                        print line
                         for j in range(len(words)-1):
                             word=words[j].lower()
                             if word==term:
