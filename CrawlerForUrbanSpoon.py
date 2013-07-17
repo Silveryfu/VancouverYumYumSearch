@@ -15,26 +15,40 @@ from bs4 import BeautifulSoup
 #	并在下次运行时打开Result.txt看看哪些restaurant已经被搜索过,不再重新搜索
 #	防止想扩大饭店搜索数量或者运行到一半crash后又要从头开始搜索的情况
 #	怎么样,很科学吧 ^_^
-MAX = 4000
-result = []
-file = open("./Result.txt","a+")
-lines = file.readlines()
-cnt=len(lines)/10
-for i in range(cnt):
-	result.append(lines[10*i+2].rstrip("\n"))
-flag=False;
-def exist(item,list):#可以用B-Tree来实现，会快很多
-	for l in list:
+def exist(item):#可以用B-Tree来实现，会快很多
+	global result
+	item=item.lower()
+	if not re.match('[\W\d_]',item[0]) is None:
+		for it in result['other']:
+			if it==item:
+				return True
+		return False
+	for l in result[item[0]]:
 		if l==item:
 			return True
 	return False
+def add(item):
+	global result
+	item=item.lower()
+	if exist(item)==False:
+		if not re.match('[\W\d_]',item[0]) is None:
+			result['other'].append(item)
+		else:
+			result[item[0]].append(item)
+MAX = 3000
+result={'a':[],'b':[],'c':[],'d':[],'e':[],'f':[],'g':[],'h':[],'i':[],'j':[],'k':[],'l':[],'m':[],'n':[],'o':[],'p':[],'q':[],'r':[],'s':[],'t':[],'u':[],'v':[],'w':[],'x':[],'y':[],'z':[],'other':[]}
+file = open("./NewResult.txt","a+")
+lines = file.readlines()
+cnt=len(lines)/10
+for i in range(cnt):
+	add(lines[10*i+1].rstrip("\n"))
+flag=False;
 def crawler(url):
     response = urllib2.urlopen(url)
     html = response.read()
     html=html.strip(" \n\t")
     return html
-def getAllLink(url,expression):
-	html = crawler(url)
+def getAllLink(html,expression):
 	areas = re.findall(expression,html)
 	for i in range(len(areas)):
 		area=areas[i]
@@ -63,13 +77,16 @@ def writeToFile(restaurantUrl):
 	if cnt > MAX:
 		flag = True
 		return
-	links = getAllLink(restaurantUrl,"href=\"/\w+?/\d+?/\d+?/restaurant/[\w-]+?/[\w-]+?\"")
-	if exist(restaurantUrl,result)==False:
+	html = crawler(restaurantUrl)
+	links = getAllLink(html,"href=\"/\w+?/\d+?/\d+?/restaurant/[\w-]+?/[\w-]+?\"")
+	#Restaurant Name
+	#<h1 class="page_title" itemprop="name">Nero Belgian Waffle Bar</h1>
+	soup = BeautifulSoup(html)
+	title = soup.find("h1", class_="page_title").get_text().encode('ascii','ignore').strip(" \n\t")
+	if exist(title)==False:
 		print cnt
-		print restaurantUrl
-		result.append(restaurantUrl)
-		html = crawler(restaurantUrl)
-		soup = BeautifulSoup(html)
+		print title
+		add(title)
 		#Telephone
 		#<h3 class="phone tel">(778) 706-0694</h3>
 		tel = soup.find("h3", class_="phone tel")
@@ -77,9 +94,6 @@ def writeToFile(restaurantUrl):
 			tel = tel.get_text().encode("ascii",'ignore').strip(" \n\t")
 		else:
 			tel = ""
-		#Restaurant Name
-		#<h1 class="page_title" itemprop="name">Nero Belgian Waffle Bar</h1>
-		title = soup.find("h1", class_="page_title").get_text().encode('ascii','ignore').strip(" \n\t")
 		#Score
 		#<div class="number"><div class="average digits percent-text rating">92<div class="percent">%</div></div></div>
 		score = soup.find("div", class_="average")
@@ -105,7 +119,7 @@ def writeToFile(restaurantUrl):
 		#imageUrl
 		imageUrl = soup.find("div", class_="resto_photos").find("ul")
 		if not imageUrl is None:
-			imageUrl = "http://66.135.44.85"+imageUrl.find("li").find("a")["href"].encode("ascii",'ignore')
+			imageUrl = imageUrl.find("li").find("a").find("img")["src"].encode("ascii",'ignore')
 		else:
 			imageUrl = ""
 		#Type example: Pub Food, Burgers, Diner        a string not a list
@@ -130,6 +144,14 @@ def writeToFile(restaurantUrl):
 			description=""
 			price = ""
 		cnt = cnt + 1
+		if price=="$":
+			price="cheap eats"
+		elif price=="$$":
+			price="moderately priced"
+		elif price=="$$$":
+			price="higher priced"
+		elif price=="$$$$":
+			price="fine dining"
 		file.write(str(cnt)+"\n"+title+"\n"+restaurantUrl+"\n"+tel+"\n"+score+"\n"+address+"\n"+description+"\n"+type+"\n"+imageUrl+"\n"+price+"\n")
 		if links != []:
 			for link in links:
@@ -137,11 +159,13 @@ def writeToFile(restaurantUrl):
 	else:
 		print "Ops"
 def main():
-	areas = getAllLink("http://66.135.44.85/c/14/Vancouver-restaurants.html","href=\"/\w+?/\d+?/\d+?/Vancouver/[\w-]+?\"")
+	html=crawler("http://66.135.44.85/c/14/Vancouver-restaurants.html")
+	areas = getAllLink(html,"href=\"/\w+?/\d+?/\d+?/Vancouver/[\w-]+?\"")
 	for area in areas:
 		if(flag):
 			break
-		restaurants = getAllLink(area,"href=\"/\w+?/\d+?/\d+?/restaurant/[\w-]+?/[\w-]+?\"")
+		html=crawler("http://66.135.44.85/c/14/Vancouver-restaurants.html")
+		restaurants = getAllLink(html,"href=\"/\w+?/\d+?/\d+?/restaurant/[\w-]+?/[\w-]+?\"")
 		for restaurant in restaurants:
 			if(flag):
 				break
