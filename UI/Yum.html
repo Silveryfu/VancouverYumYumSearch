@@ -89,10 +89,6 @@
 		<form class="search" action="Yumming.html">
 			<input name="query" type="text" class="search-query input-mysize" placeholder="">
 			  <table class="theTable">
-				<tr><td>Result1</td></tr>
-				<tr><td>Result2</td></tr>
-				<tr><td>Result3</td></tr>
-				<tr><td>Result4</td></tr>
               </table>
 			<br><br>
 			<input class="btn btn-success" type="submit" value="Yum Now!"/>
@@ -126,16 +122,59 @@
 	<script type="text/javascript" src="flatstrap-master/assets/jquery-1.9.0.min.js"></script>
 	
 	<script type="text/javascript">
-		function request(text){<!--add the data to the chart-->
+		function request(text){
 			$.ajax({
-				url: "query.php?query="+text,
-				success: function(point) {
-					var x = (new Date()).getTime();
-					var y = parseInt(point.count);
-					var series = ch.series[0];
-					var shift = series.data.length > 20;
-					series.addPoint([x,y], true, shift);
-					setTimeout(request, 1000);
+				url: "/TempApps/json.jsp?query="+text,
+				success: function(data) {
+					d=[]
+					if(typeof(data.w0)==="undefined"){
+						cnt=0;
+					}
+					else if(typeof(data.w1)==="undefined"){
+						d[0]=data.w0;
+						cnt=1;
+					}
+					else if(typeof(data.w2)==="undefined"){
+						d[0]=data.w0;
+						d[1]=data.w1;
+						cnt=2;
+					}
+					else if(typeof(data.w3)==="undefined"){
+						d[0]=data.w0;
+						d[1]=data.w1;
+						d[2]=data.w2;
+						cnt=3;
+					}
+					else if(typeof(data.w4)==="undefined"){
+						d[0]=data.w0;
+						d[1]=data.w1;
+						d[2]=data.w2;
+						d[3]=data.w3;
+						cnt=4;
+					}
+					else{
+						d[0]=data.w0;
+						d[1]=data.w1;
+						d[2]=data.w2;
+						d[3]=data.w3;
+						d[4]=data.w4;
+						cnt=5;
+					}
+					$("table").html("");
+					for(i=1;i<=cnt;i++){
+						$("table").append("<tr><td>"+d[i-1]+"</td></tr>");
+					}
+					$("table tr").click(function(e){
+						$("form input").val($(this).children("td").text());
+						$("table").hide();
+						$("form").submit();
+						e.stopPropagation();
+					});
+					$("table tr").hover(function(){
+						$(this).addClass("onselect");
+					},function(){
+						$(this).removeClass("onselect");
+					});
 				}
 			});
 		}
@@ -153,17 +192,6 @@
 			});
 			$(document).click(function(){
 				$("table").hide();
-			});
-			$("table tr").click(function(e){
-				$("form input").val($(this).children("td").text());
-				$("table").hide();
-				$("form").submit();
-				e.stopPropagation();
-			});
-			$("table tr").hover(function(){
-				$(this).addClass("onselect");
-			},function(){
-				$(this).removeClass("onselect");
 			});
 		});
 	</script>
