@@ -1,5 +1,5 @@
 import math
-
+import sys
 def argsort(seq):
     return sorted(range(len(seq)), key = seq.__getitem__, reverse=True)
 
@@ -95,9 +95,12 @@ def returnResult(query):
             Wtd=float(posting[1])
             scores[int(docId)-1]=scores[int(docId)-1]+Wtd*Wtq
             
-    return  argsort(scores)   #remember to plus one to obtain the right doc id
-def main():
-    print returnResult("asian sushi")
-
+    result=argsort(scores)   #remember to plus one to obtain the right doc id
+    for i in range(100):
+        result[i]=str(result[i])
+    result=" ".join(result[0:100])
+    return result
+def main(arg):
+    print returnResult(arg)
 if __name__=="__main__":
-    main()
+    main(sys.argv[1])
