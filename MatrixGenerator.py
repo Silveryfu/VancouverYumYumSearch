@@ -1,14 +1,14 @@
 from TfIdf import getWeight
 
 def generateMatrix():
-    fDic=open("Dictionary.txt","r")
-    fDoc=open("Document.txt","r")
+    fDic=open("Docs/Dictionary.txt","r")
+    fDoc=open("Docs/Document.txt","r")
     docLines=fDoc.readlines()
     dicLines=fDic.readlines()
     dicLength=len(dicLines)
     NumberOfDoc=len(docLines)/10
     Matrix=[]
-    fMatrix=open("FinalMatrix.txt","a+")
+    fMatrix=open("Docs/FinalMatrix.txt","a+")
     for j in range(2342,dicLength): #torres change 118 
         term=dicLines[j].rstrip("\n")
         fMatrix.write(term+",")

@@ -2,8 +2,8 @@ import os
 
 def generateDocFrequency():
     result=[]
-    fDoc=open("Document.txt","r")
-    fTerm=open("Dictionary.txt","r")
+    fDoc=open("Docs/Document.txt","r")
+    fTerm=open("Docs/Dictionary.txt","r")
     docLines=fDoc.readlines()
     termLines=fTerm.readlines()
     docTotalLength=len(docLines)
@@ -76,7 +76,7 @@ def generateDocFrequency():
         result.append([term, counter])
         print [term,counter]
 
-    fileResult=open("documentFrequency.txt","a+")
+    fileResult=open("Docs/documentFrequency.txt","a+")
     for row in result:
         fileResult.write(str(row[0])+" "+str(row[1])+"\n")
         

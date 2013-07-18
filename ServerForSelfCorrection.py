@@ -1,4 +1,4 @@
-﻿import BaseHTTPServer
+import BaseHTTPServer
 from LavenDistanceNoParallel import distance
 import re
 HOST_NAME = 'localhost' # !!!REMEMBER TO CHANGE THIS!!!
@@ -86,12 +86,12 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 def InitDic():
 	global index
 	global words
-	file=open("./Result-2.txt","r")
+	file=open("Docs/Result-2.txt","r")
 	index=[]
 	for line in file:
 		index.append(line.split())
 	file.close()
-	file=open("./Dictionary.txt","r")
+	file=open("Docs/Dictionary.txt","r")
 	words=[]
 	for line in file:
 		line=line.rstrip("\n")

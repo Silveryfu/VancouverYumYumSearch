@@ -9,9 +9,9 @@ def returnResult(query):
     scores=[]
     for i in range(0, docNum):
         scores.append(0.0)
-    fIdf=open("documentFrequency.txt","r")
+    fIdf=open("Docs/documentFrequency.txt","r")
     idfs=fIdf.readlines()
-    fPostings=open("FinalMatrix.txt","r")
+    fPostings=open("Docs/FinalMatrix.txt","r")
     postings=fPostings.readlines()
     for term in query:
         tFtd=0

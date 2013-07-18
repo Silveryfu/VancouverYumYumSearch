@@ -7,7 +7,7 @@ def getWeight(term, docNum):
     #calculate the frequency of term in a document 
     tFtd=0;
     term=term.lower()
-    file=open("Document.txt","r")
+    file=open("Docs/Document.txt","r")
     lines=file.readlines()
     NumberOfDoc=len(lines)/10
     sublines=[]
@@ -57,7 +57,7 @@ def getWeight(term, docNum):
       
     #calculate the number of documents of term
     dFt=0
-    file=open("documentFrequency.txt","r")
+    file=open("Docs/documentFrequency.txt","r")
     lines=file.readlines()
     stair=0 #the start entry/line
     if(term[0]=='a'):

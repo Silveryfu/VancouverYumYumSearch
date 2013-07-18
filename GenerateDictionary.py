@@ -1,4 +1,4 @@
-﻿#I need a dictionary in spelling correction.
+#I need a dictionary in spelling correction.
 #So I generate a dictionary from document stemmed.
 import re
 dictionary={'a':[],'b':[],'c':[],'d':[],'e':[],'f':[],'g':[],'h':[],'i':[],'j':[],'k':[],'l':[],'m':[],'n':[],'o':[],'p':[],'q':[],'r':[],'s':[],'t':[],'u':[],'v':[],'w':[],'x':[],'y':[],'z':[],'other':[]}
@@ -18,8 +18,8 @@ def add(word):
 	dictionary[word[0]].append(word)
 def main():
 	num="abcdefghijklmnopqrstuvwxyz"
-	file=open("d:/OpenCV4Android/Project/TempPython/Document.txt","r")
-	dic=open("d:/OpenCV4Android/Project/TempPython/Dictionary.txt","w")
+	file=open("Docs/Document.txt","r")
+	dic=open("Docs/Dictionary.txt","w")
 	lines=file.readlines()
 	file.close()
 	cnt=len(lines)/10
