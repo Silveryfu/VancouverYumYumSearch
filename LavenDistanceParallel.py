@@ -72,7 +72,7 @@ def distance(word1,word2):
     cc.start()
     rc=RowCalculator()
     rc.start()
-    cc.join()   #wait till the two child-threads finish
+    cc.join()   #wait till the two child-threads finish.
     rc.join()
     
   return MATRIX[len2][len1]

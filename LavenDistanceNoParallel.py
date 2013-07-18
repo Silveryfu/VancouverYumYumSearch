@@ -6,7 +6,7 @@ def distance(word1,word2):
   if len1<len2:  #can improve the performance
     len1, len2 = len2, len1
     word1, word2 = word2, word1
-    
+  
   for i in range(len2+1):
     MATRIX.append([])
   for i in range(len1+1):

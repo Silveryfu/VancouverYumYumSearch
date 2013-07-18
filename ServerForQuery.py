@@ -1,9 +1,9 @@
-﻿import BaseHTTPServer
+import BaseHTTPServer
 from LavenDistanceNoParallel import distance
 import re
 import QueryMaster
 HOST_NAME = 'localhost' # !!!REMEMBER TO CHANGE THIS!!!
-PORT_NUMBER = 5123 # Maybe set this to 9000.
+PORT_NUMBER = 5123 # Maybe set this to 9000
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 	def do_HEAD(s):
 		s.send_response(200)

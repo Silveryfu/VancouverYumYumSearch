@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 #	此版本会将搜索到的结果一行一个属性的保存在Result.txt
 #	并在下次运行时打开Result.txt看看哪些restaurant已经被搜索过,不再重新搜索
 #	防止想扩大饭店搜索数量或者运行到一半crash后又要从头开始搜索的情况
-#	怎么样,很科学吧 ^_^
+#	怎么样,很科学吧 ^_^ !
 def exist(item):#可以用B-Tree来实现，会快很多
 	global result
 	item=item.lower()
