@@ -9,7 +9,7 @@ def generateMatrix():
     NumberOfDoc=len(docLines)/10
     Matrix=[]
     fMatrix=open("FinalMatrix.txt","a+")
-    for j in range(813,dicLength): #torres change 118 
+    for j in range(2342,dicLength): #torres change 118 
         term=dicLines[j].rstrip("\n")
         fMatrix.write(term+",")
         for i in range(0, NumberOfDoc):

@@ -97,7 +97,7 @@ def returnResult(query):
             
     return  argsort(scores)   #remember to plus one to obtain the right doc id
 def main():
-    print returnResult("and bcv6b1x7")
+    print returnResult("asian sushi")
 
 if __name__=="__main__":
     main()

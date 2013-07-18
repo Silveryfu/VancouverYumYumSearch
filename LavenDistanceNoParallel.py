@@ -1,5 +1,3 @@
-import threading
-
 def distance(word1,word2):
   #Calculate the Distance of Two Words
   MATRIX=[]
