@@ -1,5 +1,8 @@
 import math
 
+def argsort(seq):
+    return sorted(range(len(seq)), key = seq.__getitem__, reverse=True)
+
 def returnResult(query):
     query=query.split()
     docNum=1604
@@ -75,24 +78,26 @@ def returnResult(query):
             words=idfs[i].split()
             if words[0]==term:
                 dFt=int(words[1])
-                stair=i   #can be used again
                 break
-            
         if(tFtd==0 or dFt==0):
             Wtq=0;
         else:
             Wtq=round((1+math.log10(tFtd))*math.log10(docNum/dFt),2)
 
-        postingArray=postings[stair].split(",")
+        for i in range(stair, len(postings)):  #the docfrequency has a different order with dic, so cannot use the obtained position directly
+            words=postings[i].split(",")
+            if words[0]==term:
+                postingArray=words
+                
         for i in range(1,len(postingArray)-1):
             posting=postingArray[i].split()
             docId=posting[0]
             Wtd=float(posting[1])
             scores[int(docId)-1]=scores[int(docId)-1]+Wtd*Wtq
-    scores.sort(reverse=True)
-    return scores
+            
+    return  argsort(scores)   #remember to plus one to obtain the right doc id
 def main():
-    print returnResult("and acme")
+    print returnResult("and bcv6b1x7")
 
 if __name__=="__main__":
     main()
