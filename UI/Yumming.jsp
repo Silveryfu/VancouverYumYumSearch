@@ -150,7 +150,7 @@
   <%
 		query = request.getParameter("query");
 		ArrayList<String> strList = new ArrayList<String>();
-		File file = new File("D:/OpenCV4Android/Project/TempPython/Document.txt");
+		File file = new File("C:/Users/admin/SilveryGit/VancouverYumYumSearch/Docs/Document.txt");
 		InputStreamReader read = null;
 		BufferedReader reader = null;
         read = new InputStreamReader(new FileInputStream(file),"ascii");
@@ -230,7 +230,7 @@
 						result+="+"+q[i];
 					}
 				}
-				urlStr = "http://localhost:1234/"+result;
+				urlStr = "http://localhost:8888/"+result;
 				url = new URL(urlStr);   
 				httpURLConnection = (HttpURLConnection) url.openConnection();
 				httpURLConnection.setRequestMethod("GET");     
