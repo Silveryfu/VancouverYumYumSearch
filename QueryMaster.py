@@ -88,8 +88,6 @@ def returnResult(query):
             words=postings[i].split(",")
             if words[0]==term:
                 postingArray=words
-            else:
-                postingArray=[]
         for i in range(1,len(postingArray)-1):
             posting=postingArray[i].split()
             docId=posting[0]
