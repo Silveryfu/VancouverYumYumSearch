@@ -1,7 +1,7 @@
 <%@page pageEncoding="ascii" import="java.sql.*" %>
 <%  response.setContentType("application/json");
 	Class.forName("com.mysql.jdbc.Driver");
-	String connectionUrl = "jdbc:mysql://192.168.172.132:3306/Temp?user=root&password=8748727210";
+	String connectionUrl = "jdbc:mysql://192.168.172.145:3306/VancouverYum?user=root&password=8748727210";
 	Connection conn = DriverManager.getConnection(connectionUrl);
 	Statement stmt = conn.createStatement();
 	String words=request.getParameter("query");
@@ -10,14 +10,14 @@
 	boolean flag=true;
 	ResultSet rs=null;
 	for(;i<wordSet.length-1;i++){
-		rs = stmt.executeQuery("SELECT word FROM dictionary where word = '"+wordSet[i]+"'");
+		rs = stmt.executeQuery("SELECT word FROM Dictionary where word = '"+wordSet[i]+"'");
 		if(!rs.next()){
 			flag=false;
 			break;
 		}
 	}
 	if(flag==true){
-		rs = stmt.executeQuery("SELECT word FROM dictionary where word like '"+wordSet[i]+"%' order by word");
+		rs = stmt.executeQuery("SELECT word FROM Dictionary where word like '"+wordSet[i]+"%' order by word");
 	}
 	out.print("{");
 	i=0;

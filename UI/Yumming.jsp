@@ -145,12 +145,11 @@
 
 
   </head>
-
   <body>
   <%
 		query = request.getParameter("query");
 		ArrayList<String> strList = new ArrayList<String>();
-		File file = new File("C:/Users/admin/SilveryGit/VancouverYumYumSearch/Docs/Document.txt");
+		File file = new File("../webapps/VancouverYum/Document.txt");
 		InputStreamReader read = null;
 		BufferedReader reader = null;
         read = new InputStreamReader(new FileInputStream(file),"ascii");
@@ -280,34 +279,6 @@
 		<hr>
       </div>
 	  <% } %>
-	  <div class="jumbotron">
-		<div class="irblock">
-			<div class="span img">
-				<a title="Hawksworth" href="http://www.hawksworthrestaurant.com">
-					<img class="img-circle" src="img/s3.jpg">
-				</a>
-			</div>
-			
-			<div class="span info">
-			   <div class="restaurntTitle">
-					<h3 class="name">Hawksworth</h3>
-			   </div>
-				<div class="details">
-					<p class="type">Type: French<p>
-					<p class="price">Pricing: Very very expensive.</p>
-					<p class="address">Location: 801 West Georgia St.</p>
-					<p class="phone">Phone: 604-673-7000</p>
-				</div> 
-				<div class="description">
-					<p class="description">Description: The do-good approach does not deter the restaurant and chef from acclaim with dishes like blueberry salmon gravlax with dirty martini pearls, sweet sicily and tarragon emulsion. With mains priced upwards of $30, it s . A la carte or tasting menus for $84 or $175.</p>
-				</div>
-				<div class="linkItem">
-					<a class="url" href="http://www.kirinrestaurants.com">http://www.kirinrestaurants.com</a>
-				</div>
-			</div>
-	  	</div> 
-		<hr>
-      </div>
 	  
 
 	  

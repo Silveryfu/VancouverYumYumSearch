@@ -9,9 +9,9 @@ def returnResult(query):
     scores=[]
     for i in range(0, docNum):
         scores.append(0.0)
-    fIdf=open("Docs/documentFrequency.txt","r")
+    fIdf=open("documentFrequency.txt","r")
     idfs=fIdf.readlines()
-    fPostings=open("Docs/FinalMatrix.txt","r")
+    fPostings=open("FinalMatrix.txt","r")
     postings=fPostings.readlines()
     for term in query:
         tFtd=0
@@ -88,7 +88,8 @@ def returnResult(query):
             words=postings[i].split(",")
             if words[0]==term:
                 postingArray=words
-                
+            else:
+                postingArray=[]
         for i in range(1,len(postingArray)-1):
             posting=postingArray[i].split()
             docId=posting[0]

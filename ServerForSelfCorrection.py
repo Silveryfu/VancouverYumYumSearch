@@ -2,12 +2,13 @@ import BaseHTTPServer
 from LavenDistanceNoParallel import distance
 import re
 HOST_NAME = 'localhost' # !!!REMEMBER TO CHANGE THIS!!!
-PORT_NUMBER = 1234 # Maybe set this to 9000.
+PORT_NUMBER = 8888 # Maybe set this to 9000.
 index=[]
 words=[]
-def isExist(word,list):
-	for i in range(len(list)):
-		if(list[i][0]==word):
+def isExist(word):
+	global index
+	for i in range(len(index)):
+		if(index[i][0]==word):
 			return i
 	return -1
 def distance(word1,word2):
@@ -34,12 +35,12 @@ def corre(arg):
 	global index
 	for i in range(len(words)):
 		if cmp(words[i][0],arg)==0:
-			return "";
+			return ""
 		words[i][1]=0
 	length=len(arg)
 	if length>1:
 		for i in range(length-1):
-			row=isExist(arg[i:(i+2)],index)
+			row=isExist(arg[i:(i+2)])
 			if(row!=-1):
 				for j in index[row][1:]:
 					words[int(j)][1]=words[int(j)][1]+1
@@ -86,12 +87,12 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 def InitDic():
 	global index
 	global words
-	file=open("Docs/Result-2.txt","r")
+	file=open("SelfCorrection.txt","r")
 	index=[]
 	for line in file:
 		index.append(line.split())
 	file.close()
-	file=open("Docs/Dictionary.txt","r")
+	file=open("Dictionary.txt","r")
 	words=[]
 	for line in file:
 		line=line.rstrip("\n")
