@@ -146,67 +146,7 @@
 
   </head>
   <body>
-  <%
-		query = request.getParameter("query");
-		ArrayList<String> strList = new ArrayList<String>();
-		File file = new File("../webapps/VancouverYum/Document.txt");
-		InputStreamReader read = null;
-		BufferedReader reader = null;
-        read = new InputStreamReader(new FileInputStream(file),"ascii");
-        reader = new BufferedReader(read);
-		String line;
-		while((line = reader.readLine()) != null) {
-			strList.add(line);
-		}
-        if(read != null) {
-            read.close();
-        }
-        if(reader != null) {
-            reader.close();
-        }
-		String result=null;
-		if(!query.equals("") && query!=null){
-			String q[]=query.split(" ");
-			int len=q.length;
-			result=q[0];
-			if(len>1){
-				for(int i=1;i<len;i++){
-					result+="+"+q[i];
-				}
-			}
-		}
-		String urlStr = "http://localhost:5123/"+result;
-		URL url = new URL(urlStr);   
-		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-		httpURLConnection.setRequestMethod("GET");     
-		InputStream is = httpURLConnection.getInputStream();   
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		result= br.readLine();
-		if(result!=null){
-			String q[]=result.split(" ");
-			docLen=q.length;
-			name=new String[docLen];
-			ur=new String[docLen];
-			tel=new String[docLen];
-			address=new String[docLen];
-			imageUrl=new String[docLen];
-			type=new String[docLen];
-			description=new String[docLen];
-			price=new String[docLen];
-			score=new String[docLen];
-			for(int i=0;i<docLen;i++){
-				name[i]=strList.get(Integer.parseInt(q[i])*10+1);
-				ur[i]=strList.get(Integer.parseInt(q[i])*10+2);
-				tel[i]=strList.get(Integer.parseInt(q[i])*10+3);
-				score[i]=strList.get(Integer.parseInt(q[i])*10+4);
-				address[i]=strList.get(Integer.parseInt(q[i])*10+5);
-				description[i]=strList.get(Integer.parseInt(q[i])*10+6);
-				type[i]=strList.get(Integer.parseInt(q[i])*10+7);
-				imageUrl[i]=strList.get(Integer.parseInt(q[i])*10+8);
-				price[i]=strList.get(Integer.parseInt(q[i])*10+9);
-			}
-		}
-	%>
+  
 	<div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
          <form class="form-search" action="#">
@@ -220,7 +160,62 @@
   
     <div class="container-narrow">
 		<%
+		String temp;
+		query = request.getParameter("query");
+		if(query!=null){
 			if(!query.equals("")){
+				String q[]=query.split(" ");
+				int len=q.length;
+				temp=q[0];
+				if(len>1){
+					for(int i=1;i<len;i++){
+						temp+="+"+q[i];
+					}
+				}
+				String urlStr = "http://localhost:8888/"+temp;
+				URL url = new URL(urlStr);   
+				HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+				httpURLConnection.setRequestMethod("GET");     
+				InputStream is = httpURLConnection.getInputStream();   
+				BufferedReader br = new BufferedReader(new InputStreamReader(is));
+				temp= br.readLine();
+				query=null;
+				if(temp!=null){
+					q=temp.split(" ");
+					len=q.length;
+					String re=q[0];
+					if(len>1){
+						for(int i=1;i<len;i++){
+							re+="+"+q[i];
+						}
+					}
+					query=temp;
+					out.print("<a href='Yumming.jsp?query="+re+"'>Did you mean "+temp+" ?</a>");
+				}
+			}
+		}
+		%>
+		<%
+			if(query==null)
+				query = request.getParameter("query");
+			ArrayList<String> strList = new ArrayList<String>();
+			File file = new File("../webapps/VancouverYum/Document.txt");
+			InputStreamReader read = null;
+			BufferedReader reader = null;
+        	read = new InputStreamReader(new FileInputStream(file),"ascii");
+        	reader = new BufferedReader(read);
+			String line;
+			while((line = reader.readLine()) != null) {
+				strList.add(line);
+			}
+        	if(read != null) {
+            	read.close();
+        	}
+        	if(reader != null) {
+            	reader.close();
+        	}
+			String result=null;
+			if(!query.equals("") && query!=null){
 				String q[]=query.split(" ");
 				int len=q.length;
 				result=q[0];
@@ -229,23 +224,36 @@
 						result+="+"+q[i];
 					}
 				}
-				urlStr = "http://localhost:8888/"+result;
-				url = new URL(urlStr);   
-				httpURLConnection = (HttpURLConnection) url.openConnection();
-				httpURLConnection.setRequestMethod("GET");     
-				is = httpURLConnection.getInputStream();   
-				br = new BufferedReader(new InputStreamReader(is));
-				result= br.readLine();
-				if(result!=null){
-					q=result.split(" ");
-					len=q.length;
-					String re=q[0];
-					if(len>1){
-						for(int i=1;i<len;i++){
-							re+="+"+q[i];
-						}
-					}
-					out.print("<a href='Yumming.jsp?query="+re+"'>Did you mean "+result+" ?</a>");
+			}
+			String urlStr = "http://localhost:5123/"+result;
+			URL url = new URL(urlStr);   
+			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+			httpURLConnection.setRequestMethod("GET");     
+			InputStream is = httpURLConnection.getInputStream();   
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			result= br.readLine();
+			if(result!=null){
+				String q[]=result.split(" ");
+				docLen=q.length;
+				name=new String[docLen];
+				ur=new String[docLen];
+				tel=new String[docLen];
+				address=new String[docLen];
+				imageUrl=new String[docLen];
+				type=new String[docLen];
+				description=new String[docLen];
+				price=new String[docLen];
+				score=new String[docLen];
+				for(int i=0;i<docLen;i++){
+					name[i]=strList.get(Integer.parseInt(q[i])*10+1);
+					ur[i]=strList.get(Integer.parseInt(q[i])*10+2);
+					tel[i]=strList.get(Integer.parseInt(q[i])*10+3);
+					score[i]=strList.get(Integer.parseInt(q[i])*10+4);
+					address[i]=strList.get(Integer.parseInt(q[i])*10+5);
+					description[i]=strList.get(Integer.parseInt(q[i])*10+6);
+					type[i]=strList.get(Integer.parseInt(q[i])*10+7);
+					imageUrl[i]=strList.get(Integer.parseInt(q[i])*10+8);
+					price[i]=strList.get(Integer.parseInt(q[i])*10+9);
 				}
 			}
 		%>
