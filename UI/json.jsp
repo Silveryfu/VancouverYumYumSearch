@@ -5,6 +5,7 @@
 	Connection conn = DriverManager.getConnection(connectionUrl);
 	Statement stmt = conn.createStatement();
 	String words=request.getParameter("query");
+	if(words!=null){
 	String wordSet[] = words.split(" ");
 	int i=0;
 	boolean flag=true;
@@ -42,4 +43,5 @@
 		}
 	}
 	out.print("}");
+	}
 %>
