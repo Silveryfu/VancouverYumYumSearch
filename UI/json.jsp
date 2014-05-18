@@ -1,7 +1,7 @@
 <%@page pageEncoding="ascii" import="java.sql.*" %>
 <%  response.setContentType("application/json");
 	Class.forName("com.mysql.jdbc.Driver");
-	String connectionUrl = "jdbc:mysql://yumcouver.cwob5qq6ng7q.us-east-1.rds.amazonaws.com:3306:3306/yumcouver?user=read-only&password=read-only";
+	String connectionUrl = "jdbc:mysql://yumcouver.cwob5qq6ng7q.us-east-1.rds.amazonaws.com:3306/yumcouver?user=read-only&password=read-only";
 	Connection conn = DriverManager.getConnection(connectionUrl);
 	Statement stmt = conn.createStatement();
 	String words=request.getParameter("query");

@@ -123,7 +123,7 @@
 	<script type="text/javascript">
 		function request(text){
 			$.ajax({
-				url: "/VancouverYum/json.jsp?query="+text,
+				url: "./json.jsp?query="+text,
 				success: function(data) {
 					d=[]
 					if(typeof(data.w0)==="undefined"){
