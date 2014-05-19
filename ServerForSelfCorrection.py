@@ -87,12 +87,12 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 def InitDic():
 	global index
 	global words
-	file=open("SelfCorrection.txt","r")
+	file=open("Docs/SelfCorrection.txt","r")
 	index=[]
 	for line in file:
 		index.append(line.split())
 	file.close()
-	file=open("Dictionary.txt","r")
+	file=open("Docs/Dictionary.txt","r")
 	words=[]
 	for line in file:
 		line=line.rstrip("\n")
