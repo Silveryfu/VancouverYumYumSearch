@@ -305,7 +305,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="flatstrap-master/assets/js/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
     <script src="flatstrap-master/assets/js/bootstrap-transition.js"></script>
     <script src="flatstrap-master/assets/js/bootstrap-alert.js"></script>
     <script src="flatstrap-master/assets/js/bootstrap-modal.js"></script>
