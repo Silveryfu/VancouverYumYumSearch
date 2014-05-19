@@ -44,4 +44,8 @@
 	}
 	out.print("}");
 	}
+	if(conn != null) {
+		conn.close();
+	}
+}
 %>
