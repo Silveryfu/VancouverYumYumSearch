@@ -1,4 +1,4 @@
-VancouverYumYumSearch
+Yumcouver.com
 =====================
 
 This is a lightweight search engine for yummy foods in Vancouver, Canada
