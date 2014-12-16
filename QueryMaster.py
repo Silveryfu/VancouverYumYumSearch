@@ -84,10 +84,12 @@ def returnResult(query):
         else:
             Wtq=round((1+math.log10(tFtd))*math.log10(docNum/dFt),2)
 
+        postingArray=[]
         for i in range(stair, len(postings)):  #the docfrequency has a different order with dic, so cannot use the obtained position directly
             words=postings[i].split(",")
             if words[0]==term:
                 postingArray=words
+                
         for i in range(1,len(postingArray)-1):
             posting=postingArray[i].split()
             docId=posting[0]
