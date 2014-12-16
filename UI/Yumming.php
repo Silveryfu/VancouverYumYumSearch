@@ -166,7 +166,7 @@
 				$query = $_GET["query"];
 			$strList = file_get_contents("https://raw.githubusercontent.com/Silveryfu/Yumcouver.com/8b260c4d673bc16e744de94a53c99853c0850a83/Docs/Document.txt");
 			$strList = explode("\n", $strList);
-			if(! strcmp($query, "") && $query != NULL){
+			if(strcmp($query, "") && $query != NULL){
 				$q = preg_split("/[\s]+/", $query);
 				$result = join("+", $q);
 			}
