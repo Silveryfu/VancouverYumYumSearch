@@ -150,96 +150,49 @@
 		if($query != NULL){
 			if(strcmp($query, "") != 0){
 				$q = preg_split("/[\s]+/", $query);
-				$len = strlen($q);
-				$temp = q[0];
-				if($len > 1){
-					for($i=1; $i < $len; $i++){
-						$temp = $temp . "+" . $q[$i];
-					}
-				}
-				$r = new HttpRequest("http://localhost:8888/" . $temp, HttpRequest::METH_GET);
-				try {
-    				$r->send();
-    				if ($r->getResponseCode() == 200) {
-        				$temp = $r->getResponseBody();
-    				}
-				} catch (HttpException $ex) {
-    				echo $ex;
-				}
-				if($temp != null && strcmp($temp, "") != 0){
-					q=temp.split(" ");
-					len=q.length;
-					String re=q[0];
-					if(len>1){
-						for(int i=1;i<len;i++){
-							re+="+"+q[i];
-						}
-					}
-					query=temp;
-					out.print("<a href='Yumming.jsp?query="+re+"'>Did you mean "+temp+" ?</a>");
+				$temp = join("+", $q);
+				$temp = file_get_contents("http://localhost:8888/" . $temp);
+				if($temp != NULL && strcmp($temp, "") != 0){
+					$q = preg_split("/[\s]+/", $temp);
+					$temp = join("+", $q);
+					$query = $temp;
+					print("<a href='Yumming.php?query=" . $temp . "'>Did you mean " . join(" ", $q) . " ?</a>");
 				}
 			}
 		}
 		?>
 		<?php
-			if(query==null)
-				query = request.getParameter("query");
-			ArrayList<String> strList = new ArrayList<String>();
-			File file = new File("../webapps/VancouverYum/Document.txt");
-			InputStreamReader read = null;
-			BufferedReader reader = null;
-        	read = new InputStreamReader(new FileInputStream(file),"ascii");
-        	reader = new BufferedReader(read);
-			String line;
-			while((line = reader.readLine()) != null) {
-				strList.add(line);
+			if($query == NULL)
+				$query = $_GET["query"];
+			$strList = file_get_contents("https://raw.githubusercontent.com/Silveryfu/Yumcouver.com/8b260c4d673bc16e744de94a53c99853c0850a83/Docs/Document.txt");
+			$strList = explode("\n", $strList);
+			if(! strcmp($query, "") && $query != NULL){
+				$q = preg_split("/[\s]+/", $query);
+				$result = join("+", $q);
 			}
-        	if(read != null) {
-            	read.close();
-        	}
-        	if(reader != null) {
-            	reader.close();
-        	}
-			String result=null;
-			if(!query.equals("") && query!=null){
-				String q[]=query.split(" ");
-				int len=q.length;
-				result=q[0];
-				if(len>1){
-					for(int i=1;i<len;i++){
-						result+="+"+q[i];
-					}
-				}
-			}
-			String urlStr = "http://localhost:5123/"+result;
-			URL url = new URL(urlStr);   
-			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-			httpURLConnection.setRequestMethod("GET");     
-			InputStream is = httpURLConnection.getInputStream();   
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			result= br.readLine();
-			if(result!=null){
-				String q[]=result.split(" ");
-				docLen=q.length;
-				name=new String[docLen];
-				ur=new String[docLen];
-				tel=new String[docLen];
-				address=new String[docLen];
-				imageUrl=new String[docLen];
-				type=new String[docLen];
-				description=new String[docLen];
-				price=new String[docLen];
-				score=new String[docLen];
-				for($i=0; $i < $docLen; $i++){
-					$name[$i]=$strList.get(Integer.parseInt(q[i])*10+1);
-					$ur[$i]=strList.get(Integer.parseInt(q[i])*10+2);
-					$tel[$i]=strList.get(Integer.parseInt(q[i])*10+3);
-					$score[$i]=strList.get(Integer.parseInt(q[i])*10+4);
-					$address[$i]=strList.get(Integer.parseInt(q[i])*10+5);
-					$description[$i]=strList.get(Integer.parseInt(q[i])*10+6);
-					$type[$i]=strList.get(Integer.parseInt(q[i])*10+7);
-					$imageUrl[$i]=strList.get(Integer.parseInt(q[i])*10+8);
-					$price[$i]=strList.get(Integer.parseInt(q[i])*10+9);
+			$result = file_get_contents("http://localhost:5123/" . $result);
+			if($result != NULL){
+				$q = preg_split("/[\s]+/", $result);
+				$docLen = count($q);
+				$name = array();
+				$ur = array();
+				$tel =  array();
+				$address = array();
+				$imageUrl = array();
+				$type = array();
+				$description = array();
+				$price = array();
+				$score = array();
+				for($i = 0; $i < $docLen; $i++){
+					$name[] = $strList[intval($q[$i])*10+1];
+					$ur[] = $strList[intval($q[$i])*10+2];
+					$tel[] = $strList[intval($q[$i])*10+3];
+					$score[] = $strList[intval($q[$i])*10+4];
+					$address[] = $strList[intval($q[$i])*10+5];
+					$description[] = $strList[intval($q[$i])*10+6];
+					$type[] = $strList[intval($q[$i])*10+7];
+					$imageUrl[] = $strList[intval($q[$i])*10+8];
+					$price[] = $strList[intval($q[$i])*10+9];
 				}
 			}
 		?>
@@ -249,8 +202,8 @@
       <div class="jumbotron">
 		<div class="irblock">
 			<div class="span img">
-				<a title="Kirin" href="<% out.print(ur[i]);%>">
-					<img class="img-circle" style="height: 100%; width:100%;" src="<% out.print(imageUrl[i]);%>">
+				<a title="Kirin" href="<?php print($ur[$i]);?>">
+					<img class="img-circle" style="height: 100%; width:100%;" src="<?php print($imageUrl[$i]);?>">
 				</a>
 			</div>
 			
